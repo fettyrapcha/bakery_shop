@@ -1,13 +1,18 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import BakeryItemViewSet, CustomerViewSet, OrderViewSet, OrderItemViewSet
-
-router = DefaultRouter()
-router.register(r'bakery_items', BakeryItemViewSet)
-router.register(r'customers', CustomerViewSet)
-router.register(r'orders', OrderViewSet)
-router.register(r'order_items', OrderItemViewSet)
+from django.urls import path
+from .views import (
+    BakeryItemListCreateView,
+    BakeryItemRetrieveUpdateDestroyView,
+    CustomerListCreateView,
+    CustomerRetrieveUpdateDestroyView,
+    OrderListCreateView,
+    OrderRetrieveUpdateDestroyView,
+)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('bakery_items/', BakeryItemListCreateView.as_view(), name='bakery_item_list_create'),
+    path('bakery_items/<int:pk>/', BakeryItemRetrieveUpdateDestroyView.as_view(), name='bakery_item_retrieve_update_destroy'),
+    path('customers/', CustomerListCreateView.as_view(), name='customer_list_create'),
+    path('customers/<int:pk>/', CustomerRetrieveUpdateDestroyView.as_view(), name='customer_retrieve_update_destroy'),
+    path('orders/', OrderListCreateView.as_view(), name='order_list_create'),
+    path('orders/<int:pk>/', OrderRetrieveUpdateDestroyView.as_view(), name='order_retrieve_update_destroy'),
 ]

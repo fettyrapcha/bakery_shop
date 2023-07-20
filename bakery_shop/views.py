@@ -1,20 +1,27 @@
-# from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import generics
 from .models import BakeryItem, Customer, Order, OrderItem
 from .serializers import BakeryItemSerializer, CustomerSerializer, OrderSerializer, OrderItemSerializer
 
-class BakeryItemViewSet(viewsets.ModelViewSet):
+class BakeryItemListCreateView(generics.ListCreateAPIView):
     queryset = BakeryItem.objects.all()
     serializer_class = BakeryItemSerializer
 
-class CustomerViewSet(viewsets.ModelViewSet):
+class BakeryItemRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = BakeryItem.objects.all()
+    serializer_class = BakeryItemSerializer
+
+class CustomerListCreateView(generics.ListCreateAPIView):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
-class OrderItemViewSet(viewsets.ModelViewSet):
-    queryset = OrderItem.objects.all()
-    serializer_class = OrderItemSerializer
+class CustomerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
 
-class OrderViewSet(viewsets.ModelViewSet):
+class OrderListCreateView(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+class OrderRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
